@@ -1,0 +1,11 @@
+{
+  "body": {
+    "content": "eyJwb3N0YWxfY29kZSI6MTIyMn0=",
+    "file": false,
+    "fileSize": false
+  },
+  "headers": {},
+  "method": "GET",
+  "title": "New HTTP Request",
+  "url": "http://localhost:8000/public/v2/check/oto/202222"
+}
