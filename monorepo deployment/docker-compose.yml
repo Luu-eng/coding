@@ -1,0 +1,770 @@
+version: '3.8'
+networks:
+  default: {}
+  traefik:
+    external: true
+services:
+  # admin7:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/admin7:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - METABASE_SITE_URL=${METABASE_SITE_URL:?}
+  #   - METABASE_SECRET_KEY=${METABASE_SECRET_KEY:?}
+  #   - ZAMMAD_SECRET_KEY=${ZAMMAD_SECRET_KEY:?}
+  #   - NEXT_PUBLIC_MEILI_URL=https://meili${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}/
+  #   - NEXT_PUBLIC_GRAPHQL_URL=https://mesh${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}/graphql
+  #   - NEXT_PUBLIC_KEYCLOAK_URL=${KEYCLOAK_URL:?}
+  #   - NEXT_PUBLIC_KEYCLOAK_REALM=${KEYCLOAK_REALM:?}
+  #   - NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID:?}
+  #   - NEXT_PUBLIC_ODOO_BASE_URL=${ODOO_URL:?}
+  #   - NEXT_PUBLIC_ZAMMAD_URL=${ZAMMAD_URL:?}
+  #   - NEXT_PUBLIC_GITLAB_DHCP_URL=${INIT7_GITLAB_URL:?}search?project_id=456&group_id=219&search_code=true&repository_ref=master
+  #   - NEXT_PUBLIC_POST_TRACKING_URL=${POST_TRACKING_URL:?}
+  #   - NEXT_PUBLIC_WSG_ALO_DETAIL_URL=${WSG_ALO_DETAIL_URL:?}
+  #   - NEXT_PUBLIC_WSG_BBCS_ACCESS_URL=${WSG_BBCS_ACCESS_URL:?}
+  #   - NEXT_PUBLIC_PROMETHEUS_API_URL=${PROMETHEUS_API_URL:?}
+  #   - NEXT_PUBLIC_NETBOX_URL=${NETBOX_URL:?}
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-admin7-3000.rule=Host(`admin7${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-admin7-3000.service=${CD_INSTANCE:?}-admin7-3000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-admin7-3000-svc.loadbalancer.server.port=3000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-admin7-3000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-admin7-3000.middlewares=${CD_INSTANCE:?}-admin7-3000-ipwhitelist@docker
+  #   expose:
+  #   - 3000
+  # accessapi:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/accessapi:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - AUTH_JWKS_URL=${AUTH_JWKS_URL:?}
+  #   - WSG_USERNAME=${WSG_USERNAME:?}
+  #   - WSG_PASSWORD=${WSG_PASSWORD:?}
+  #   - WSG_ALO_URL=${WSG_ALO_URL:?}
+  #   - WSG_BBCS_URL=${WSG_BBCS_URL:?}
+  #   - WSG_URL_BBCS_BB=${WSG_URL_BBCS_BB:?}
+  #   - WSG_URL_NOTIFICATION=${WSG_URL_NOTIFICATION:?}
+  #   - WSG_URL_INFOSRV=${WSG_URL_INFOSRV:?}
+  #   - ALEX_URL=${ALEX_URL:?}
+  #   - ALEX_USERNAME=${ALEX_USERNAME:?}
+  #   - ALEX_PASSWORD=${ALEX_PASSWORD:?}
+  #   - AADB_API_URL=${AADB_API_URL:?}
+  #   - AADB_API_TOKEN=${AADB_API_TOKEN:?}
+  #   - WAREHOUSE_DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - WAREHOUSE_DB_USER=${WAREHOUSE_DB_USER:?}
+  #   - WAREHOUSE_DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - WAREHOUSE_DB_DB=${WAREHOUSE_DB_DB:?}
+  #   - WAREHOUSE_DB_PASSWORD=${WAREHOUSE_DB_PASSWORD:?}
+  #   - RADIUS_DB_HOST=${RADIUS_DB_HOST:?}
+  #   - RADIUS_DB_PORT=${RADIUS_DB_PORT:?}
+  #   - RADIUS_DB_DB=${RADIUS_DB_DB:?}
+  #   - RADIUS_DB_USER=${RADIUS_DB_USER:?}
+  #   - RADIUS_DB_PASSWORD=${RADIUS_DB_PASSWORD:?}
+  #   - S3_HOST=${S3_HOST:?}
+  #   - S3_ACCESS_KEY=${S3_ACCESS_KEY:?}
+  #   - S3_SECRET_KEY=${S3_SECRET_KEY:?}
+  #   - ZATTOO_PASS_API_URL=${ZATTOO_PASS_API_URL:?}
+  #   - ZATTOO_PASS_API_SECRET=${ZATTOO_PASS_API_SECRET:?}
+  #   - BRIKKS_URL=${BRIKKS_URL:?}
+  #   - BRIKKS_TOKEN=${BRIKKS_TOKEN:?}
+  #   - ODOO_RPC_HOST=${ODOO_RPC_HOST:?}
+  #   - ODOO_RPC_PORT=${ODOO_RPC_PORT:?}
+  #   - ODOO_RPC_DB=${ODOO_RPC_DB:?}
+  #   - ODOO_RPC_USER=${ODOO_RPC_USER:?}
+  #   - ODOO_RPC_PASSWORD=${ODOO_RPC_PASSWORD:?}
+  #   - ODOO_RPC_USE_SSL=${ODOO_RPC_USE_SSL:?}
+  #   - ODOO_BASE_URL=${ODOO_BASE_URL:?}
+  #   - SMTP_HOST=${SMTP_HOST:?}
+  #   - SMTP_PORT=${SMTP_PORT:?}
+  #   - SMTP_LOGIN=${SMTP_LOGIN:?}
+  #   - SMTP_PASSWORD=${SMTP_PASSWORD:?}
+  #   - SMTP_SECURITY=${SMTP_SECURITY:?}
+  #   - IMAP_PASSWORD=${IMAP_PASSWORD:?}
+  #   - IMAP_USERNAME=${IMAP_USERNAME:?}
+  #   - IMAP_HOST=${IMAP_HOST:?}
+  #   - MEILI_URL=http://meilisearch:7700
+  #   - LOGGING_LEVEL=${ACCESSAPI_LOG_LEVEL:-DEBUG}
+  #   - AUTH_DEBUG_ALLOW_ALL_REQUESTS=${AUTH_DEBUG_ALLOW_ALL_REQUESTS:-false}
+  #   - TEMPORAL_HOST=temporal:7233
+  #   - START_WORKFLOWS=${START_WORKFLOWS:-false}
+  #   - ENABLE_METRICS=${ENABLE_METRICS:-true}
+  #   - PROMETHEUS_PORT=${PROMETHEUS_PORT:-8001}
+  #   - PROMETHEUS_VERBOSE_EXEMPLARS=${PROMETHEUS_VERBOSE_EXEMPLARS:-true}
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-5000.rule=Host(`accessapi${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-5000.service=${CD_INSTANCE:?}-accessapi-5000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-accessapi-5000-svc.loadbalancer.server.port=5000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-accessapi-5000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-5000.middlewares=${CD_INSTANCE:?}-accessapi-5000-ipwhitelist@docker
+  #   expose:
+  #   - 5000
+  #   healthcheck:
+  #     test: curl -f http://127.0.0.1:5000/healthcheck
+  #     interval: 3s
+  #     timeout: 2s
+  #     retries: 3
+  #     start_period: 2s
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #     meilisearch:
+  #       condition: service_healthy
+  # accessapi-worker:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/accessapi:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - AUTH_JWKS_URL=${AUTH_JWKS_URL:?}
+  #   - WSG_USERNAME=${WSG_USERNAME:?}
+  #   - WSG_PASSWORD=${WSG_PASSWORD:?}
+  #   - WSG_ALO_URL=${WSG_ALO_URL:?}
+  #   - WSG_BBCS_URL=${WSG_BBCS_URL:?}
+  #   - WSG_URL_BBCS_BB=${WSG_URL_BBCS_BB:?}
+  #   - WSG_URL_NOTIFICATION=${WSG_URL_NOTIFICATION:?}
+  #   - WSG_URL_INFOSRV=${WSG_URL_INFOSRV:?}
+  #   - ALEX_URL=${ALEX_URL:?}
+  #   - ALEX_USERNAME=${ALEX_USERNAME:?}
+  #   - ALEX_PASSWORD=${ALEX_PASSWORD:?}
+  #   - AADB_API_URL=${AADB_API_URL:?}
+  #   - AADB_API_TOKEN=${AADB_API_TOKEN:?}
+  #   - WAREHOUSE_DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - WAREHOUSE_DB_USER=${WAREHOUSE_DB_USER:?}
+  #   - WAREHOUSE_DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - WAREHOUSE_DB_DB=${WAREHOUSE_DB_DB:?}
+  #   - WAREHOUSE_DB_PASSWORD=${WAREHOUSE_DB_PASSWORD:?}
+  #   - RADIUS_DB_HOST=${RADIUS_DB_HOST:?}
+  #   - RADIUS_DB_PORT=${RADIUS_DB_PORT:?}
+  #   - RADIUS_DB_DB=${RADIUS_DB_DB:?}
+  #   - RADIUS_DB_USER=${RADIUS_DB_USER:?}
+  #   - RADIUS_DB_PASSWORD=${RADIUS_DB_PASSWORD:?}
+  #   - S3_HOST=${S3_HOST:?}
+  #   - S3_ACCESS_KEY=${S3_ACCESS_KEY:?}
+  #   - S3_SECRET_KEY=${S3_SECRET_KEY:?}
+  #   - ZATTOO_PASS_API_URL=${ZATTOO_PASS_API_URL:?}
+  #   - ZATTOO_PASS_API_SECRET=${ZATTOO_PASS_API_SECRET:?}
+  #   - BRIKKS_URL=${BRIKKS_URL:?}
+  #   - BRIKKS_TOKEN=${BRIKKS_TOKEN:?}
+  #   - ODOO_RPC_HOST=${ODOO_RPC_HOST:?}
+  #   - ODOO_RPC_PORT=${ODOO_RPC_PORT:?}
+  #   - ODOO_RPC_DB=${ODOO_RPC_DB:?}
+  #   - ODOO_RPC_USER=${ODOO_RPC_USER:?}
+  #   - ODOO_RPC_PASSWORD=${ODOO_RPC_PASSWORD:?}
+  #   - ODOO_RPC_USE_SSL=${ODOO_RPC_USE_SSL:?}
+  #   - ODOO_BASE_URL=${ODOO_BASE_URL:?}
+  #   - SMTP_HOST=${SMTP_HOST:?}
+  #   - SMTP_PORT=${SMTP_PORT:?}
+  #   - SMTP_LOGIN=${SMTP_LOGIN:?}
+  #   - SMTP_PASSWORD=${SMTP_PASSWORD:?}
+  #   - SMTP_SECURITY=${SMTP_SECURITY:?}
+  #   - IMAP_PASSWORD=${IMAP_PASSWORD:?}
+  #   - IMAP_USERNAME=${IMAP_USERNAME:?}
+  #   - IMAP_HOST=${IMAP_HOST:?}
+  #   - MEILI_URL=http://meilisearch:7700
+  #   - LOGGING_LEVEL=${ACCESSAPI_LOG_LEVEL:-DEBUG}
+  #   - AUTH_DEBUG_ALLOW_ALL_REQUESTS=${AUTH_DEBUG_ALLOW_ALL_REQUESTS:-false}
+  #   - TEMPORAL_HOST=temporal:7233
+  #   - START_WORKFLOWS=${START_WORKFLOWS:-false}
+  #   - ENABLE_METRICS=${ENABLE_METRICS:-true}
+  #   - PROMETHEUS_PORT=${PROMETHEUS_PORT:-8001}
+  #   - PROMETHEUS_VERBOSE_EXEMPLARS=${PROMETHEUS_VERBOSE_EXEMPLARS:-true}
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-worker-8001.rule=Host(`accessapi-worker${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-worker-8001.service=${CD_INSTANCE:?}-accessapi-worker-8001-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-accessapi-worker-8001-svc.loadbalancer.server.port=8001
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-accessapi-worker-8001-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-accessapi-worker-8001.middlewares=${CD_INSTANCE:?}-accessapi-worker-8001-ipwhitelist@docker
+  #   expose:
+  #   - 8001
+  #   command: python -m app.worker
+  # minio:
+  #   image: quay.io/minio/minio:RELEASE.2023-11-11T08-14-41Z-cpuv1
+  #   restart: unless-stopped
+  #   environment:
+  #   - MINIO_ROOT_USER=${S3_ACCESS_KEY:?}
+  #   - MINIO_ROOT_PASSWORD=${S3_SECRET_KEY:?}
+  #   - MINIO_VOLUMES=/data
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9000.rule=Host(`s3${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9000.service=${CD_INSTANCE:?}-minio-9000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-minio-9000-svc.loadbalancer.server.port=9000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-minio-9000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9000.middlewares=${CD_INSTANCE:?}-minio-9000-ipwhitelist@docker
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9001.rule=Host(`minio${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9001.service=${CD_INSTANCE:?}-minio-9001-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-minio-9001-svc.loadbalancer.server.port=9001
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-minio-9001-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-minio-9001.middlewares=${CD_INSTANCE:?}-minio-9001-ipwhitelist@docker
+  #   expose:
+  #   - 9000
+  #   - 9001
+  #   command: server --console-address ":9001"
+  #   volumes:
+  #   - minio:/data
+  #   healthcheck:
+  #     test:
+  #     - CMD
+  #     - mc
+  #     - ready
+  #     - local
+  #     interval: 1s
+  #     timeout: 2s
+  #     retries: 3
+  # db_migrations:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/migrations:${DEPLOY_TAG:?}
+  #   restart: never
+  #   environment:
+  #   - WAREHOUSE_DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - WAREHOUSE_DB_USER=${WAREHOUSE_DB_USER:?}
+  #   - WAREHOUSE_DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - WAREHOUSE_DB_DB=${WAREHOUSE_DB_DB:?}
+  #   - WAREHOUSE_DB_PASSWORD=${WAREHOUSE_DB_PASSWORD:?}
+  #   networks:
+  #   - default
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels: []
+  #   profiles:
+  #   - nop
+  # dbt:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/dbt:${DEPLOY_TAG:?}
+  #   restart: never
+  #   environment:
+  #   - WAREHOUSE_DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - WAREHOUSE_DB_USER=${WAREHOUSE_DB_USER:?}
+  #   - WAREHOUSE_DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - WAREHOUSE_DB_DB=${WAREHOUSE_DB_DB:?}
+  #   - WAREHOUSE_DB_PASSWORD=${WAREHOUSE_DB_PASSWORD:?}
+  #   networks:
+  #   - default
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels: []
+  #   profiles:
+  #   - nop
+  # postgraphile:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/postgraphile:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - POSTGRAPHILE_DATABASE_URL=postgres://${WAREHOUSE_DB_USER:?}:${WAREHOUSE_DB_PASSWORD:?}@${WAREHOUSE_DB_HOST:?}:${WAREHOUSE_DB_PORT:?}/${WAREHOUSE_DB_DB:?}
+  #   - POSTGRAPHILE_CORS_ALLOW_ORIGIN=*
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-postgraphile-5000.rule=Host(`graphile${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-postgraphile-5000.service=${CD_INSTANCE:?}-postgraphile-5000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-postgraphile-5000-svc.loadbalancer.server.port=5000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-postgraphile-5000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-postgraphile-5000.middlewares=${CD_INSTANCE:?}-postgraphile-5000-ipwhitelist@docker
+  #   expose:
+  #   - 5000
+  #   healthcheck:
+  #     test:
+  #     - CMD
+  #     - bun
+  #     - --bun
+  #     - run
+  #     - /app/healthcheck.ts
+  #     interval: 2s
+  #     retries: 5
+  #     start_period: 5s
+  #     timeout: 2s
+  # graphql-mesh:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/graphql-mesh:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - ACCESSAPI_GRAPHQL_URL=http://accessapi:5000/graphql
+  #   - POSTRGRAPHILE_GRAPHQL_URL=http://postgraphile:5000/graphql
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-graphql-mesh-4000.rule=Host(`mesh${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-graphql-mesh-4000.service=${CD_INSTANCE:?}-graphql-mesh-4000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-graphql-mesh-4000-svc.loadbalancer.server.port=4000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-graphql-mesh-4000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-graphql-mesh-4000.middlewares=${CD_INSTANCE:?}-graphql-mesh-4000-ipwhitelist@docker
+  #   expose:
+  #   - 4000
+  #   init: true
+  #   healthcheck:
+  #     test: curl --fail http://127.0.0.1:4000/health
+  #     interval: 2s
+  #     retries: 5
+  #     start_period: 5s
+  #     timeout: 2s
+  #   depends_on:
+  #     accessapi:
+  #       condition: service_healthy
+  #     postgraphile:
+  #       condition: service_healthy
+  # meilisearch:
+  #   image: getmeili/meilisearch:v1.4.1
+  #   restart: unless-stopped
+  #   environment:
+  #   - MEILI_NO_ANALYTICS=true
+  #   - MEILI_DB_PATH=/meili_data/data.ms
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-meilisearch-7700.rule=Host(`meili${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-meilisearch-7700.service=${CD_INSTANCE:?}-meilisearch-7700-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-meilisearch-7700-svc.loadbalancer.server.port=7700
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-meilisearch-7700-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-meilisearch-7700.middlewares=${CD_INSTANCE:?}-meilisearch-7700-ipwhitelist@docker
+  #   expose:
+  #   - 7700
+  #   shm_size: 4GB
+  #   volumes:
+  #   - meili:/meili_data/data.ms
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '4'
+  #         memory: 8G
+  #       reservations:
+  #         cpus: '2'
+  #         memory: 4G
+  #   healthcheck:
+  #     test:
+  #     - CMD
+  #     - /usr/bin/curl
+  #     - -X
+  #     - GET
+  #     - http://0.0.0.0:7700/health
+  #     start_period: 5s
+  #     interval: 1s
+  #     timeout: 2s
+  #     retries: 3
+  # metabase:
+  #   image: metabase/metabase:v0.49.6
+  #   restart: unless-stopped
+  #   environment:
+  #   - MB_DB_TYPE=postgres
+  #   - MB_DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - MB_DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - MB_DB_DBNAME=${WAREHOUSE_DB_METABASE_DB:?}
+  #   - MB_DB_USER=${WAREHOUSE_DB_METABASE_USER:?}
+  #   - MB_DB_PASS=${WAREHOUSE_DB_METABASE_PASSWORD:?}
+  #   - MB_ANON_TRACKING_ENABLED=False
+  #   - MB_EMAIL_SMTP_HOST=${SMTP_HOST:?}
+  #   - MB_EMAIL_SMTP_PORT=${SMTP_PORT:?}
+  #   - MB_EMAIL_SMTP_USERNAME=${SMTP_LOGIN:?}
+  #   - MB_EMAIL_SMTP_PASSWORD=${SMTP_PASSWORD:?}
+  #   - MB_EMAIL_SMTP_SECURITY=${SMTP_SECURITY:?}
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-metabase-3000.rule=Host(`metabase${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-metabase-3000.service=${CD_INSTANCE:?}-metabase-3000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-metabase-3000-svc.loadbalancer.server.port=3000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-metabase-3000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-metabase-3000.middlewares=${CD_INSTANCE:?}-metabase-3000-ipwhitelist@docker
+  #   expose:
+  #   - 3000
+  # temporal:
+  #   image: temporalio/auto-setup:1.22.0
+  #   restart: unless-stopped
+  #   environment:
+  #   - DB=postgresql
+  #   - DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - POSTGRES_USER=${WAREHOUSE_DB_TEMPORAL_USER:?}
+  #   - POSTGRES_PWD=${WAREHOUSE_DB_TEMPORAL_PASSWORD:?}
+  #   - DBNAME=${WAREHOUSE_DB_TEMPORAL_DB:?}
+  #   - POSTGRES_SEEDS=${WAREHOUSE_DB_HOST:?}
+  #   - PROMETHEUS_ENDPOINT=0.0.0.0:7232
+  #   - BIND_ON_IP=0.0.0.0
+  #   - TEMPORAL_BROADCAST_ADDRESS=127.0.0.1
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7233.rule=Host(`temporal${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7233.service=${CD_INSTANCE:?}-temporal-7233-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-temporal-7233-svc.loadbalancer.server.port=7233
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-temporal-7233-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.services.${CD_INSTANCE:?}-temporal-7233.loadbalancer.server.scheme=h2c
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-temporal-7233-autodetect.contenttype.autodetect=false
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7233.middlewares=${CD_INSTANCE:?}-temporal-7233-ipwhitelist@docker
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7232.rule=Host(`temporal-metrics${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7232.service=${CD_INSTANCE:?}-temporal-7232-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-temporal-7232-svc.loadbalancer.server.port=7232
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-temporal-7232-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-7232.middlewares=${CD_INSTANCE:?}-temporal-7232-ipwhitelist@docker
+  #   expose:
+  #   - 7233
+  #   - 7232
+  # temporal-ui:
+  #   image: temporalio/ui:2.19.0
+  #   restart: unless-stopped
+  #   environment:
+  #   - TEMPORAL_ADDRESS=temporal:7233
+  #   - TEMPORAL_CORS_ORIGINS=${TEMPORAL_UI_URL:?}
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-ui-8080.rule=Host(`temporal-ui${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-ui-8080.service=${CD_INSTANCE:?}-temporal-ui-8080-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-temporal-ui-8080-svc.loadbalancer.server.port=8080
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-temporal-ui-8080-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-temporal-ui-8080.middlewares=${CD_INSTANCE:?}-temporal-ui-8080-ipwhitelist@docker
+  #   expose:
+  #   - 8080
+  #   depends_on:
+  #   - temporal
+  # grafana:
+  #   image: grafana/grafana:10.0.3
+  #   restart: unless-stopped
+  #   environment:
+  #   - GF_SERVER_ROOT_URL=https://grafana${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}/
+  #   - GF_AUTH_GENERIC_OAUTH_NAME=Keycloak
+  #   - GF_AUTH_GENERIC_OAUTH_ENABLED=True
+  #   - GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP=True
+  #   - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=${KEYCLOAK_GRAFANA_CLIENT_ID:?}
+  #   - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=${KEYCLOAK_GRAFANA_CLIENT_SECRET:?}
+  #   - GF_AUTH_GENERIC_OAUTH_SCOPES=openid email profile roles
+  #   - GF_AUTH_GENERIC_OAUTH_EMPTY_SCOPES=False
+  #   - GF_AUTH_GENERIC_OAUTH_AUTH_URL=${KEYCLOAK_REALM_URL:?}/protocol/openid-connect/auth
+  #   - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=${KEYCLOAK_REALM_URL:?}/protocol/openid-connect/token
+  #   - GF_AUTH_GENERIC_OAUTH_API_URL=${KEYCLOAK_REALM_URL:?}/protocol/openid-connect/userinfo
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-grafana-3000.rule=Host(`grafana${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-grafana-3000.service=${CD_INSTANCE:?}-grafana-3000-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-grafana-3000-svc.loadbalancer.server.port=3000
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-grafana-3000-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-grafana-3000.middlewares=${CD_INSTANCE:?}-grafana-3000-ipwhitelist@docker
+  #   expose:
+  #   - 3000
+  #   volumes:
+  #   - grafana:/var/lib/grafana
+  # odoo:
+  #   image: harbor.sys.init7.net/gitlab-ci/monorepo/odoo:${DEPLOY_TAG:?}
+  #   restart: unless-stopped
+  #   environment:
+  #   - DB_HOST=${WAREHOUSE_DB_HOST:?}
+  #   - DB_PORT=${WAREHOUSE_DB_PORT:?}
+  #   - DB_NAME=${WAREHOUSE_DB_DB:?}
+  #   - DB_USER=${WAREHOUSE_DB_USER:?}
+  #   - DB_PASSWORD=${WAREHOUSE_DB_PASSWORD:?}
+  #   - RUNNING_ENV=dev
+  #   - ODOO_QUEUE_JOB_CHANNELS=root:0
+  #   - UNACCENT=False
+  #   - WORKERS=0
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-odoo-8069.rule=Host(`odoo${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-odoo-8069.service=${CD_INSTANCE:?}-odoo-8069-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-odoo-8069-svc.loadbalancer.server.port=8069
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-odoo-8069-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-odoo-8069.middlewares=${CD_INSTANCE:?}-odoo-8069-ipwhitelist@docker
+  #   expose:
+  #   - 8069
+  #   command: odoo --proxy-mode --http-interface=0.0.0.0 --http-port=8069
+  #   profiles:
+  #   - staging
+  # mailhog:
+  #   image: mailhog/mailhog:v1.0.1
+  #   restart: unless-stopped
+  #   environment:
+  #   - MH_STORAGE=maildir
+  #   - MH_MAILDIR_PATH=/home/mailhog
+  #   networks:
+  #   - default
+  #   - traefik
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels:
+  #   - traefik.enable=true
+  #   - traefik.docker.network=traefik
+  #   - traefik.http.routers.${CD_INSTANCE:?}-mailhog-8025.rule=Host(`mailhog${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+  #   - traefik.http.routers.${CD_INSTANCE:?}-mailhog-8025.service=${CD_INSTANCE:?}-mailhog-8025-svc
+  #   - traefik.http.services.${CD_INSTANCE:?}-mailhog-8025-svc.loadbalancer.server.port=8025
+  #   - traefik.http.middlewares.${CD_INSTANCE:?}-mailhog-8025-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+  #   - traefik.http.routers.${CD_INSTANCE:?}-mailhog-8025.middlewares=${CD_INSTANCE:?}-mailhog-8025-ipwhitelist@docker
+  #   expose:
+  #   - 8025
+  #   volumes:
+  #   - mailhog:/home/mailhog
+  #   profiles:
+  #   - staging
+  # socks5:
+    # image: serjs/go-socks5-proxy:latest
+    # restart: unless-stopped
+    # environment:
+    # - PROXY_USER=dev
+    # - PROXY_PASSWORD=${SOCKS5_PROXY_PASSWORD:?}
+    # - PROXY_PORT=1080
+    # - ALLOWED_DEST_FQDN=(webservices|wholesale).swisscom.com
+    # networks:
+    # - default
+    # extra_hosts:
+    # - ${CD_HOSTNAME_BASE:?}:host-gateway
+    # labels: []
+    # profiles:
+    # - staging
+    # ports:
+    # - 1080:1080
+  netbox:
+    image: monorepo-netbox-prod
+    restart: unless-stopped
+    environment:
+      - CORS_ORIGIN_ALLOW_ALL=True
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - DB_HOST
+      - DB_PORT
+      - EMAIL_SERVER=localhost
+      - EMAIL_PORT=25
+      - EMAIL_USERNAME
+      - EMAIL_PASSWORD
+      - EMAIL_TIMEOUT=5
+      - EMAIL_FROM=noc@init7.net
+      - EMAIL_USE_SSL=false
+      - EMAIL_USE_TLS=false
+      - EMAIL_SSL_CERTFILE
+      - EMAIL_SSL_KEYFILE
+      - MAX_PAGE_SIZE=1000
+      - MEDIA_ROOT=/opt/netbox/netbox/media
+      - METRICS_ENABLED=false
+      - NAPALM_USERNAME
+      - NAPALM_PASSWORD
+      - NAPALM_TIMEOUT=30
+      - REDIS_HOST=netbox-redis
+      - REDIS_PASSWORD
+      - REDIS_DATABASE=0
+      - REDIS_SSL=false
+      - REDIS_CACHE_HOST=netbox-redis-cache
+      - REDIS_CACHE_PASSWORD
+      - REDIS_CACHE_DATABASE=1
+      - REDIS_CACHE_SSL=false
+      - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
+      - SECRET_KEY
+      - SKIP_STARTUP_SCRIPTS=false
+      - SKIP_SUPERUSER=false
+      - SUPERUSER_NAME=init7admin
+      - SUPERUSER_EMAIL=noc@init7.net
+      - SUPERUSER_PASSWORD
+      - SUPERUSER_API_TOKEN
+      - WEBHOOKS_ENABLED=true
+      - DEBUG=true
+      - ALLOWED_HOSTS
+      - PLUGINS
+      - MAPS_URL=https://maps.google.com/?q=
+      - LOGIN_REQUIRED=true
+      - LIBRENMS_API_TOKEN
+    networks:
+    - default
+    # - traefik
+    labels:
+    - traefik.enable=true
+    - traefik.docker.network=traefik
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-8080.rule=Host(`netbox${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-8080.service=${CD_INSTANCE:?}-netbox-8080-svc
+    - traefik.http.services.${CD_INSTANCE:?}-netbox-8080-svc.loadbalancer.server.port=8080
+    - traefik.http.middlewares.${CD_INSTANCE:?}-netbox-8080-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-8080.middlewares=${CD_INSTANCE:?}-netbox-8080-ipwhitelist@docker
+    ports:
+      - "127.0.0.1:8082:8080"
+    depends_on:
+    - netbox-redis
+    - netbox-redis-cache
+    - netbox-worker    
+    entrypoint:
+      - /opt/netbox/venv/bin/python
+      - /opt/netbox/netbox/manage.py
+    user: '1001'
+    command: runserver 0.0.0.0:8080
+
+  netbox-redis-cache:
+    image: redis:7-alpine@sha256:de14eedfbd1fc871d0f5aa1773fd80743930e45354d035b6f3b551e7ffa44df8
+    restart: unless-stopped
+    environment:
+      - REDIS_CACHE_PASSWORD
+    networks:
+    - default
+    labels: []
+    command:
+    - sh
+    - -c
+    - redis-server --requirepass $$REDIS_CACHE_PASSWORD
+  netbox-redis:
+    image: redis:7-alpine@sha256:de14eedfbd1fc871d0f5aa1773fd80743930e45354d035b6f3b551e7ffa44df8
+    restart: always
+    command:
+      - sh
+      - -c # this is to evaluate the $REDIS_PASSWORD from the env
+      - redis-server --appendonly yes --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
+    volumes:
+      - redis:/data
+    environment:
+      - REDIS_PASSWORD
+    networks:
+    - default
+
+  # netbox-redis-cache:
+  #   image: redis:7-alpine@sha256:de14eedfbd1fc871d0f5aa1773fd80743930e45354d035b6f3b551e7ffa44df8
+  #   restart: always
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   command:
+  #     - sh
+  #     - -c # this is to evaluate the $REDIS_CACHE_PASSWORD from the env
+  #     - redis-server --requirepass $$REDIS_CACHE_PASSWORD ## $$ because of docker-compose
+  #   environment:
+  #     - REDIS_CACHE_PASSWORD
+  # netbox-redis:
+  #   image: redis:7-alpine@sha256:de14eedfbd1fc871d0f5aa1773fd80743930e45354d035b6f3b551e7ffa44df8
+  #   restart: unless-stopped
+  #   environment:
+  #     - REDIS_PASSWORD
+  #   networks:
+  #   - default
+  #   extra_hosts:
+  #   - ${CD_HOSTNAME_BASE:?}:host-gateway
+  #   labels: []
+  #   command:
+  #   - sh
+  #   - -c
+  #   - redis-server --requirepass $$REDIS_PASSWORD
+  #   volumes:
+  #     - redis:/data
+  netbox-worker:
+    image: monorepo-netbox-prod
+    restart: unless-stopped
+    environment:
+      - CORS_ORIGIN_ALLOW_ALL=True
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - DB_HOST
+      - DB_PORT
+      - EMAIL_SERVER=localhost
+      - EMAIL_PORT=25
+      - EMAIL_USERNAME
+      - EMAIL_PASSWORD
+      - EMAIL_TIMEOUT=5
+      - EMAIL_FROM=noc@init7.net
+      - EMAIL_USE_SSL=false
+      - EMAIL_USE_TLS=false
+      - EMAIL_SSL_CERTFILE
+      - EMAIL_SSL_KEYFILE
+      - MAX_PAGE_SIZE=1000
+      - MEDIA_ROOT=/opt/netbox/netbox/media
+      - METRICS_ENABLED=false
+      - NAPALM_USERNAME
+      - NAPALM_PASSWORD
+      - NAPALM_TIMEOUT=30
+      - REDIS_HOST=netbox-redis
+      - REDIS_PASSWORD
+      - REDIS_DATABASE=0
+      - REDIS_SSL=false
+      - REDIS_CACHE_HOST=netbox-redis-cache
+      - REDIS_CACHE_PASSWORD
+      - REDIS_CACHE_DATABASE=1
+      - REDIS_CACHE_SSL=false
+      - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
+      - SECRET_KEY
+      - SKIP_STARTUP_SCRIPTS=false
+      - SKIP_SUPERUSER=false
+      - SUPERUSER_NAME=init7admin
+      - SUPERUSER_EMAIL=noc@init7.net
+      - SUPERUSER_PASSWORD
+      - SUPERUSER_API_TOKEN
+      - WEBHOOKS_ENABLED=true
+      - DEBUG=true
+      - ALLOWED_HOSTS
+      - PLUGINS
+      - MAPS_URL=https://maps.google.com/?q=
+      - LOGIN_REQUIRED=true
+      - LIBRENMS_API_TOKEN
+    networks:
+    - default
+    # - traefik
+    extra_hosts:
+    - ${CD_HOSTNAME_BASE:?}:host-gateway
+    labels:
+    - traefik.enable=true
+    - traefik.docker.network=traefik
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-worker-8080.rule=Host(`netbox${CD_HOSTNAME_PREFIX?}.${CD_HOSTNAME_BASE:?}`)
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-worker-8080.service=${CD_INSTANCE:?}-netbox-worker-8080-svc
+    - traefik.http.services.${CD_INSTANCE:?}-netbox-worker-8080-svc.loadbalancer.server.port=8080
+    - traefik.http.middlewares.${CD_INSTANCE:?}-netbox-worker-8080-ipwhitelist.ipwhitelist.sourcerange=${IP_ACL:?}
+    - traefik.http.routers.${CD_INSTANCE:?}-netbox-worker-8080.middlewares=${CD_INSTANCE:?}-netbox-worker-8080-ipwhitelist@docker
+    expose: []
+    command: rqworker
+    depends_on:
+    - netbox-redis
+    - netbox-redis-cache
+volumes:
+  grafana: null
+  mailhog: null
+  meili: null
+  minio: null
+  redis:
